@@ -17,9 +17,7 @@ SELECT
 	StandardCost, 
 	FinishedGoodsFlag 
 FROM 
-	DimProduct
-	AS 
-		SelectedColumnsDimproduct;
+	DimProduct AS SelectedColumnsDimproduct;
 
 
 -- 3) Esponi in Output i prodotti il cui campo FinishedGoodsFlag è uguale a 1
@@ -32,8 +30,7 @@ SELECT
 	StandardCost, 
 	FinishedGoodsFlag 
 FROM 
-	DimProduct 
-		AS SelectedColumnsDimproduct 
+	DimProduct AS SelectedColumnsDimproduct 
 WHERE 
 FinishedGoodsFlag = 1;
 
