@@ -1,10 +1,10 @@
-﻿--ESERCIZIO M3_2_1 SQL - L'ISTRUZIONE SELECT 
+-- ESERCIZIO M3_2_1 SQL - L'ISTRUZIONE SELECT 
 
 
--- 1) Esplora la tabella dei prodotti {DimProduct}
+-- 1) Esplora la tabella dei prodotti DimProduct
 
 SELECT * 
-FROM DimProduct;
+FROM dimproduct;
 
 
 -- 2) Esponi in Output i campi ProductKey, ProductAlternateKey, EnglishProductName, Color, StandardCost, FinishedGoodsFlag e assegna un alias
@@ -15,9 +15,11 @@ SELECT
 	EnglishProductName, 
 	Color, 
 	StandardCost, 
-	FinishedGoodsFlag 
+	FinishedGoodsFlag
 FROM 
-	DimProduct AS SelectedColumnsDimproduct;
+	dimproduct
+	AS 
+		SelectedColumnsDimproduct;
 
 
 -- 3) Esponi in Output i prodotti il cui campo FinishedGoodsFlag è uguale a 1
@@ -28,9 +30,10 @@ SELECT
 	EnglishProductName, 
 	Color, 
 	StandardCost, 
-	FinishedGoodsFlag 
+	FinishedGoodsFlag
 FROM 
-	DimProduct AS SelectedColumnsDimproduct 
+	dimproduct
+		AS SelectedColumnsDimproduct 
 WHERE 
 FinishedGoodsFlag = 1;
 
@@ -47,7 +50,7 @@ SELECT
 	StandardCost, 
 	ListPrice
 FROM 
-	DimProduct
+	dimproduct
 WHERE 
 	ProductAlternateKey LIKE 'FR%' OR ProductAlternateKey LIKE 'BK%';
 
@@ -64,7 +67,7 @@ SELECT
 	ListPrice, 
 	ListPrice - StandardCost AS Markup
 FROM 
-	DimProduct 
+	dimproduct 
 WHERE 
 	ProductAlternateKey LIKE 'FR%' OR ProductAlternateKey LIKE 'BK%';
 
@@ -76,7 +79,7 @@ SELECT
 	ModelName, 
 	ListPrice 
 FROM 
-	DimProduct 
+	dimproduct 
 WHERE 
 	FinishedGoodsFlag =1 AND ListPrice BETWEEN 1000 AND 2000;
 
@@ -84,7 +87,7 @@ WHERE
 -- 7) Esplora la tabella degli impiegati aziendali DimEmployee
 
 SELECT * 
-FROM DimEmployee;
+FROM dimemployee;
 
 
 -- 8) Esponi, interrogando la tabella degli impiegati aziendali, lʼelenco dei soli agenti. Gli agenti sono i dipendenti per i quali il campo SalespersonFlag è uguale a 1.
@@ -94,12 +97,12 @@ SELECT
 	MiddleName, 
 	LastName 
 FROM 
-	DimEmployee
+	dimemployee
 WHERE 
 	SalesPersonFlag=1;
 
 
--- 9) Interroga la tabella delle vendite (FactResellerSales). Esponi in output lʼelenco delle transazioni registrate a partire dal 1 gennaio 2013 dei soli codici prodotto: 597, 598, 477, 214. 
+-- 9) Interroga la tabella delle vendite (FactResellerSales). Esponi in output lʼelenco delle transazioni registrate a partire dal 1 gennaio 2020 dei soli codici prodotto: 597, 598, 477, 214. 
 -- Calcola per ciascuna transazione il profitto (SalesAmount - TotalProductCost)
 
 
@@ -107,9 +110,9 @@ SELECT
 	ProductKey, 
 	SalesAmount, 
 	TotalProductCost, 
-	SalesAmount - TotalProductCost AS Profit, 
-	FORMAT(OrderDate, 'yyyy-MM-dd') AS OrderDate 
+	SalesAmount- TotalProductCost AS Profit, 
+	FORMAT(OrderDate, 'yyyy-MM-dd') AS OrderDate
 FROM 
-	FactResellerSales 
+	factresellersales
 WHERE 
-	ProductKey IN (597, 598, 477, 214) AND OrderDate > '2013-01-01'
+	ProductKey IN (597, 598, 477, 214) AND OrderDate > '2020-01-01'
