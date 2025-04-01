@@ -26,7 +26,7 @@ Qui raccolgo esercizi, progetti, query, e materiali di approfondimento realizzat
 
 **[Gaetano Rizzo__Grits23]**  
 PhD_Psicologo_Data Analyst in formazione, 
-appassionato di mente, cervello, strutture e visualizzazioni dati e tutto ciò che può contribuire a comprendere la realtà che ci plasma e circonda._
+appassionato di mente, cervello, strutture e visualizzazioni dati e di tutto ciò che può contribuire a comprendere la realtà che ci plasma e circonda._
 
 📫 Per contatti, idee o collaborazione: [gaetanorizzo@yahoo.com] 
 
