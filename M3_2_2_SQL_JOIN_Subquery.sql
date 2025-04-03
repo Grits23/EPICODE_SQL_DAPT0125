@@ -23,7 +23,7 @@ SELECT
 	, P.EnglishProductName AS Product
 	, PS.EnglishProductSubcategoryName AS Subcategory
 FROM dimproduct as P 
-INNER JOIN dimproductsubcategory AS PS
+LEFT JOIN dimproductsubcategory AS PS
 	ON P.ProductSubcategoryKey = PS.ProductSubcategoryKey;
 
 
