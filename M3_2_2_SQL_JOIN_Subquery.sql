@@ -1,6 +1,7 @@
 /* ESERCIZIO 3.2.2 SQL - "JOIN e SUBQUERY" -  AdventureWorksDW
 Interrogare e filtrare le tabelle. Dove possibile svolgi gli esercizi utilizzando sia JOIN che SUBQUERY */
 
+
 -- 1. Esponi lʼanagrafica dei prodotti indicando per ciascun prodotto anche la sua sottocategoria (DimProduct, DimProductSubcategory)
 		
 /* Inizio l'esplorazione delle due tabelle per conoscerne i campi */
@@ -49,6 +50,7 @@ SELECT
 	, P.ProductSubcategoryKey
 	, P.EnglishProductName AS Product
 	,	(
+	
 			SELECT
 			PS.EnglishProductSubcategoryName 
 			FROM dimproductsubcategory AS PS
@@ -103,19 +105,20 @@ FROM dimproduct AS P
 WHERE ProductSubcategoryKey IS NOT NULL;
 
 
+
 -- 3)Esponi lʼelenco dei soli prodotti venduti (DimProduct, FactResellerSales). 
 
 /* Qui innesto le subquery precedenti per mostrare i campi subcategory e category */
-SELECT DISTINCT
+SELECT 
 P.ProductKey
 , P.ProductSubcategoryKey
 , RS.ResellerKey
 , P.EnglishProductName AS Product
 ,	(
 
-        SELECT EnglishProductSubcategoryName
-        FROM dimproductsubcategory AS PS
-        WHERE PS.ProductSubcategoryKey = P.ProductSubcategoryKey
+	        SELECT EnglishProductSubcategoryName
+	        FROM dimproductsubcategory AS PS
+	        WHERE PS.ProductSubcategoryKey = P.ProductSubcategoryKey
         
     ) AS Subcategory
 ,	(
@@ -201,6 +204,8 @@ SELECT
 		) AS Product
 FROM factresellersales AS RS;
 
+
+
 -- 6) Esponi lʼelenco delle transazioni di vendita indicando la categoria di appartenenza di ciascun prodotto venduto.
 
 SELECT 
@@ -244,7 +249,7 @@ RS.ResellerKey
 			ON PS.ProductCategoryKey = PC.ProductCategoryKey
 		WHERE P.ProductKey = RS.ProductKey
         
-    ) AS ProductCategory
+    	) AS ProductCategory
 FROM factresellersales AS RS;
 
 
@@ -252,6 +257,8 @@ FROM factresellersales AS RS;
 -- 7) Esplora la tabella DimReseller
 SELECT *
 FROM dimreseller;
+
+
 
 -- 8) Esponi in output lʼelenco dei reseller indicando, per ciascun reseller, anche la sua area geografica. 
 
@@ -268,7 +275,8 @@ SELECT
 FROM dimreseller AS R
 LEFT JOIN dimgeography AS G
 	ON R.GeographyKey = G.GeographyKey;
-    
+
+
 -- 8) Versione SUBQUERY
 
 SELECT 
@@ -304,6 +312,7 @@ SELECT
 		)   AS City
  FROM dimreseller AS R;
     
+
 
 /* 9) Esponi lʼelenco delle transazioni di vendita. Il result set deve esporre i campi: 
 SalesOrderNumber, SalesOrderLineNumber, OrderDate, UnitPrice, Quantity, TotalProductCost. 
@@ -369,6 +378,7 @@ FROM
 		LEFT OUTER JOIN 
 		dimproduct AS P 
 			ON RS.ProductKey = P.ProductKey
+	
 	) as A
 /* Le informazioni riguadanti la categoria, il rivenditore e l'area di vendita sono ricavate tramite join */
 LEFT JOIN dimproductsubcategory AS PS
@@ -392,18 +402,19 @@ FROM dimproduct AS P
 WHERE P.ProductKey IN 
 -- La doppia subquery divisa da OR permette di legare l'anno delle tabelle factresellersales e factinternetsales al nome prodotto presente in dimproducts atraverso i campi ProductKey
 	(
+	
 		SELECT 
 			RS.ProductKey 
 		FROM factresellersales AS RS 
-        WHERE YEAR (RS.OrderDate)= 2019
+        	WHERE YEAR (RS.OrderDate)= 2019
     
-    ) 
+   	 ) 
 OR P.ProductKey IN 
 	(
     
 		SELECT 
 			WS.ProductKey 
-        FROM factinternetsales AS WS 
-        WHERE YEAR (WS.OrderDate)= 2019
+        	FROM factinternetsales AS WS 
+        	WHERE YEAR (WS.OrderDate)= 2019
         
 	);
