@@ -11,13 +11,13 @@ CREATE VIEW GR_View_Product
 AS (	
 		SELECT 
 			P.ProductKey 
-            , P.ProductSubcategoryKey
-            , PC.ProductCategoryKey
+            		, P.ProductSubcategoryKey
+            		, PC.ProductCategoryKey
 			, P.EnglishProductName AS ProductName
 			, PS.EnglishProductSubcategoryName AS SubcategoryName
 			, PC.EnglishProductCategoryName AS CategoryName 
-            , P.FinishedGoodsFlag AS FinishedProduct
-            , P.ListPrice AS ListPrice
+            		, P.FinishedGoodsFlag AS FinishedProduct
+            		, P.ListPrice AS ListPrice
 		FROM dimproduct AS P
 		JOIN dimproductsubcategory AS PS
 			ON P.ProductSubcategoryKey = PS.ProductSubcategoryKey
@@ -35,14 +35,14 @@ CREATE VIEW GR_View_Reseller
 AS (
 		SELECT 
 			R.ResellerKey
-            , R.ResellerName AS ResellerName
-            , R.BusinessType AS BusinessType
-            , R.AnnualSales AS AnnualSales
-            , G.City AS City
-            , G.StateProvinceName AS Province
-            , G.EnglishCountryRegionName AS Region
-        FROM dimreseller AS R
-        JOIN dimgeography AS G
+           	 	, R.ResellerName AS ResellerName
+           	 	, R.BusinessType AS BusinessType
+            		, R.AnnualSales AS AnnualSales
+            		, G.City AS City
+            		, G.StateProvinceName AS Province
+            		, G.EnglishCountryRegionName AS Region
+        	FROM dimreseller AS R
+        	JOIN dimgeography AS G
 			ON R.GeographyKey = G.GeographyKey 
 	);
 
@@ -56,15 +56,15 @@ CREATE VIEW GR_View_Sales
 AS	(
 		SELECT 
 			OrderDate
-            , SalesOrderNumber
-            , SalesOrderLineNumber
-            , ProductKey
-            , ResellerKey
-            , OrderQuantity
-            , UnitPrice
-            , SalesAmount
-            , TotalProductCost
-            , SalesAmount - TotalProductCost  AS Markup
+		        , SalesOrderNumber
+		        , SalesOrderLineNumber
+		        , ProductKey
+		        , ResellerKey
+		        , OrderQuantity
+		        , UnitPrice
+		        , SalesAmount
+		        , TotalProductCost
+		        , SalesAmount - TotalProductCost  AS Markup
 		FROM factresellersales 
 	);
 
